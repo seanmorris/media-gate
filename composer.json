@@ -17,8 +17,7 @@
         "digitaldonkey/ecverify":"1.0",
         "seanmorris/ids": "dev-sm-api-tooling as dev-master",
         "guzzlehttp/guzzle": "^7.4",
-        "guzzlehttp/psr7": "^2.1",
-        "symfony/http-client": "^6.0"
+        "guzzlehttp/psr7": "^2.1"
     },
     "require-dev": {
 		"simpletest/simpletest": "dev-master"
