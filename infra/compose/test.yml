@@ -1,0 +1,29 @@
+version: '2.4'
+
+services:
+
+  idilic:
+    depends_on: [database]
+    volumes: ["../../:/app", "/tmp:/tmp"]
+    extends:
+      file: base.yml
+      service: idilic
+
+  server:
+    ports: ['${IDS_EXPOSE_HTTP}:8080']
+    depends_on: [database]
+    volumes: ["../../:/app", "/tmp:/tmp"]
+    extends:
+      file: base.yml
+      service: server
+
+  database:
+    ports: ['${IDS_EXPOSE_SQL}:${IDS_DATABASES_MAIN_PORT}']
+    volumes: ["../../:/app", "/tmp:/tmp"]
+    extends:
+      file: base.yml
+      service: database
+
+volumes:
+  schema:
+    driver: local

@@ -1,0 +1,8 @@
+*
+!.gitignore
+.env
+.env*
+!*.default
+!*.default.yml
+!*.default.yaml
+!*.default.json

@@ -1,0 +1,27 @@
+{
+    "name": "seanmorris/mediagate",
+    "description": "Project template for Ids projects.",
+    "type": "project",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Sean Morris",
+            "email": "sean@seanmorr.is"
+        }
+    ],
+    "require": {
+    	"knplabs/github-api": "^3.4",
+        "digitaldonkey/ecverify":"1.0",
+        "seanmorris/ids": "dev-sm-api-tooling as dev-master",
+        "php-http/curl-client": "^2.2",
+        "symfony/http-client": "^6.0"
+    },
+    "require-dev": {
+		"simpletest/simpletest": "dev-master"
+	},
+	"autoload": {
+		"psr-4": {
+			"SeanMorris\\MediaGate\\":"source/"
+		}
+	}
+}

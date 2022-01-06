@@ -1,0 +1,26 @@
+version: '2.4'
+
+services:
+
+  server:
+    build:
+      context: ../../
+    extends:
+      file: ../../${CORERELDIR}infra/compose/base.yml
+      service: server
+
+  idilic:
+    build:
+      context: ../../
+    extends:
+      file: ../../${CORERELDIR}infra/compose/base.yml
+      service: idilic
+
+  database:
+    extends:
+      file: ../../vendor/seanmorris/ids/infra/compose/base.yml
+      service: database
+
+volumes:
+  schema:
+    driver: local
