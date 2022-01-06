@@ -2,6 +2,7 @@
     "name": "seanmorris/mediagate",
     "description": "Project template for Ids projects.",
     "type": "project",
+    "minimum-stability": "dev",
     "license": "Apache-2.0",
     "authors": [
         {
