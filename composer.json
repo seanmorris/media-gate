@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-    	"php": ">=8.1",
+    	"php": "^8.1",
     	"ext-bcmath":"*",
     	"ext-mbstring":"*",
     	"knplabs/github-api": "^3.4",
