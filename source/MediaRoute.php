@@ -10,18 +10,13 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 		header('Content-type: text/json');
 		header('Access-Control-Allow-Origin: *');
 
-		$github = \SeanMorris\Ids\Settings::get('github', 'token');
+		$token  = \SeanMorris\Ids\Settings::read('github', 'token');
+		$github = new Github($token);
 
-		$file = $github->api('repo')->contents()->show(
-			'seanmorris', 'ephsys-media-processor', 'index/content.json'
-		);
+		$repo = 'seanmorris/ephsys-media-processor';
+		$file = 'index/content.json';
 
-		$blob = $github->api('gitData')->blobs()->show(
-			'seanmorris', 'ephsys-media-processor'
-			, substr($file['_links']['git'], -40)
-		);
-
-		return base64_decode($blob['content']);
+		return $github->getFile($repo, $file);
 	}
 
 	public function show($router)
@@ -34,11 +29,15 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 
 		if(!$token)
 		{
+			\SeanMorris\Ids\Log::debug('Access token not provided.');
+
 			return FALSE;
 		}
 
 		if(substr($token, 0, 7) !== 'Bearer ')
 		{
+			\SeanMorris\Ids\Log::debug('Authorization header not valid.');
+
 			return FALSE;
 		}
 
@@ -49,6 +48,8 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 			|| empty($token->signature)
 			|| empty($token->challenge)
 		){
+			\SeanMorris\Ids\Log::debug('Access token not valid.');
+
 			return FALSE;
 		}
 
@@ -56,11 +57,13 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 
 		if(!$challenge)
 		{
+			\SeanMorris\Ids\Log::debug('Challenge not valid.');
 			return FALSE;
 		}
 
 		if(time() > $challenge->validThru)
 		{
+			\SeanMorris\Ids\Log::debug('Challenge expired.');
 			return FALSE;
 		}
 
@@ -78,6 +81,7 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 
 		if(!$valid || $token->address !== $recoveredAddress)
 		{
+			\SeanMorris\Ids\Log::debug('Challenge address does not match.');
 			return FALSE;
 		}
 
@@ -92,16 +96,19 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 
 		$assetPath = $router->request()->get('assetPath') ?? '';
 
-		$header = $headers[substr($assetPath, -3)] ?? $headers[substr($assetPath, -4)];
+		$header = $headers[substr($assetPath, -3)]
+			?? $headers[substr($assetPath, -4)];
 
 		if(!$header)
 		{
+			\SeanMorris\Ids\Log::debug('Type not specified.');
 			return FALSE;
 		}
 
 		header($header);
 
-		$github = \SeanMorris\Ids\Settings::get('github', 'token');
+		$token  = \SeanMorris\Ids\Settings::read('github', 'token');
+		$github = new Github($token);
 
 		$assetPathParts = explode('/', $assetPath);
 
@@ -109,20 +116,18 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 
 		$directoryPath = implode($assetPathParts);
 
-		$files = $github->api('repo')->contents()
-		->show('seanmorris', 'ephsys-media-processor', $directoryPath);
+		$repo = 'seanmorris/ephsys-media-processor';
+
+		$files = $github->getDir($repo, $directoryPath);
 
 		foreach($files as $file)
 		{
-			if($file['path'] === $assetPath)
+			if($file->path === $assetPath)
 			{
-				$blob = $github->api('gitData')->blobs()->show(
-					'seanmorris', 'ephsys-media-processor'
-					, substr($file['_links']['git'], -40)
-				);
+				$hash = substr($file->_links->git, -40);
+				$blob = $github->getBlob($repo, $hash);
 
-				return base64_decode($blob['content']);
-				break;
+				return $blob;
 			}
 		}
 	}

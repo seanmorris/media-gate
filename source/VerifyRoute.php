@@ -96,7 +96,7 @@ class VerifyRoute implements \SeanMorris\Ids\Routable
 			'type'        => 'challenge'
 			, 'issuedAt'  => time()
 			, 'issuedFor' => $address
-			, 'validThru' => time() + 300
+			, 'validThru' => time() + 150
 			, 'challenge' => implode(PHP_EOL, str_split($blob, 80))
 		]);
 	}

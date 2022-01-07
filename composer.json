@@ -1,32 +1,28 @@
 {
-    "name": "seanmorris/mediagate",
-    "description": "Project template for Ids projects.",
-    "type": "project",
-    "minimum-stability": "dev",
-    "license": "Apache-2.0",
-    "authors": [
-        {
-            "name": "Sean Morris",
-            "email": "sean@seanmorr.is"
-        }
-    ],
-    "require": {
-    	"php": "^8.1.0",
-    	"ext-bcmath": "*",
-    	"ext-mbstring": "*",
-    	"knplabs/github-api": "^3.4",
-        "digitaldonkey/ecverify":"1.0",
-        "seanmorris/ids": "dev-sm-api-tooling as dev-master",
-        "guzzlehttp/guzzle": "^7.4",
-        "guzzlehttp/psr7": "^2.1",
-        "composer-runtime-api": "^2.1"
+	"name": "seanmorris/mediagate",
+	"description": "Project template for Ids projects.",
+	"type": "project",
+	"minimum-stability": "dev",
+	"license": "Apache-2.0",
+	"authors": [
+		{
+			"name": "Sean Morris",
+			"email": "sean@seanmorr.is"
+		}
+	],
+	"require": {
+		"php": "^8.1.0",
+		"ext-bcmath": "*",
+		"ext-mbstring": "*",
+		"digitaldonkey/ecverify":"1.0",
+		"seanmorris/ids": "dev-sm-api-tooling as dev-master"
     },
-    "require-dev": {
+	"require-dev": {
 		"simpletest/simpletest": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {
-			"SeanMorris\\MediaGate\\":"source/"
+		"SeanMorris\\MediaGate\\":"source/"
 		}
 	}
 }
