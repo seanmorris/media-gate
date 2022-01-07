@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8bf01126548289f219981e69175f57f",
+    "content-hash": "215c88ae54484f68d57fbfa3f49670e5",
     "packages": [
         {
             "name": "digitaldonkey/ecverify",
@@ -476,7 +476,8 @@
     "platform": {
         "php": "^8.1.0",
         "ext-bcmath": "*",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "ext-redis": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"
