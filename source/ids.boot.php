@@ -2,9 +2,8 @@
 
 if($_ENV['REDIS_URL'])
 {
-	\SeanMorris\Ids\Log::error($redisUrlParts);
-
 	$redisUrlParts = parse_url($_ENV['REDIS_URL']);
+	\SeanMorris\Ids\Log::error($redisUrlParts);
 	ini_set('session.save_handler', 'redis');
 	ini_set(
 		'session.save_path'
