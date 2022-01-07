@@ -1,0 +1,298 @@
+{
+    "linker": {
+        "links": {},
+        "inheritance": {
+            "SeanMorris\\Ids\\Mysql\\WhereStatement": [
+                "SeanMorris\\Ids\\Mysql\\UpdateStatement",
+                "SeanMorris\\Ids\\Mysql\\CountStatement",
+                "SeanMorris\\Ids\\Mysql\\DeleteStatement",
+                "SeanMorris\\Ids\\Mysql\\SelectStatement"
+            ],
+            "SeanMorris\\Ids\\Mysql\\Statement": [
+                "SeanMorris\\Ids\\Mysql\\CountStatement",
+                "SeanMorris\\Ids\\Mysql\\DeleteStatement",
+                "SeanMorris\\Ids\\Mysql\\InsertStatement",
+                "SeanMorris\\Ids\\Mysql\\SelectStatement",
+                "SeanMorris\\Ids\\Mysql\\UpdateStatement",
+                "SeanMorris\\Ids\\Mysql\\WhereStatement"
+            ],
+            "SeanMorris\\Ids\\Mysql\\SelectStatement": [
+                "SeanMorris\\Ids\\Mysql\\CountStatement"
+            ],
+            "SeanMorris\\Ids\\Http\\HttpException": [
+                "SeanMorris\\Ids\\Http\\HttpResponse",
+                "SeanMorris\\Ids\\Http\\Http404",
+                "SeanMorris\\Ids\\Http\\Http405",
+                "SeanMorris\\Ids\\Http\\HttpDocument",
+                "SeanMorris\\Ids\\Http\\Http406",
+                "SeanMorris\\Ids\\Http\\Http401",
+                "SeanMorris\\Ids\\Http\\Http302",
+                "SeanMorris\\Ids\\Http\\Http303",
+                "SeanMorris\\Ids\\Http\\Http403",
+                "SeanMorris\\Ids\\Http\\Http400",
+                "SeanMorris\\Ids\\Http\\Http201",
+                "SeanMorris\\Ids\\Http\\Http202",
+                "SeanMorris\\Ids\\Http\\Http402"
+            ],
+            "Exception": [
+                "SeanMorris\\Ids\\Http\\Http201",
+                "SeanMorris\\Ids\\Http\\Http202",
+                "SeanMorris\\Ids\\Http\\Http302",
+                "SeanMorris\\Ids\\Http\\Http303",
+                "SeanMorris\\Ids\\Http\\Http400",
+                "SeanMorris\\Ids\\Http\\Http401",
+                "SeanMorris\\Ids\\Http\\Http402",
+                "SeanMorris\\Ids\\Http\\Http403",
+                "SeanMorris\\Ids\\Http\\Http404",
+                "SeanMorris\\Ids\\Http\\Http405",
+                "SeanMorris\\Ids\\Http\\Http406",
+                "SeanMorris\\Ids\\Http\\HttpDocument",
+                "SeanMorris\\Ids\\Http\\HttpException",
+                "SeanMorris\\Ids\\Http\\HttpResponse"
+            ],
+            "SeanMorris\\Ids\\Http\\HttpResponse": [
+                "SeanMorris\\Ids\\Http\\HttpDocument"
+            ],
+            "SeanMorris\\Ids\\Collection\\AppendGeneratorIterator": [
+                "SeanMorris\\Ids\\Http\\EventSource"
+            ],
+            "AppendIterator": [
+                "SeanMorris\\Ids\\Http\\EventSource",
+                "SeanMorris\\Ids\\Collection\\RankIterator",
+                "SeanMorris\\Ids\\Collection\\AppendGeneratorIterator"
+            ],
+            "IteratorIterator": [
+                "SeanMorris\\Ids\\Collection\\AppendGeneratorIterator",
+                "SeanMorris\\Ids\\Collection\\CacheReIterator",
+                "SeanMorris\\Ids\\Collection\\RankIterator",
+                "SeanMorris\\Ids\\Http\\EventSource"
+            ],
+            "SeanMorris\\Ids\\Model": [
+                "SeanMorris\\Ids\\Relationship",
+                "SeanMorris\\Ids\\Test\\Model\\Foobar",
+                "SeanMorris\\Ids\\Test\\Model\\Foozle",
+                "SeanMorris\\Ids\\Test\\Model\\Grocery",
+                "SeanMorris\\Ids\\Test\\Model\\GroceryList",
+                "SeanMorris\\Ids\\Test\\Model\\Octopus",
+                "SeanMorris\\Ids\\Test\\Model\\Tentacle"
+            ],
+            "SeanMorris\\Ids\\Disk\\File": [
+                "SeanMorris\\Ids\\Disk\\Directory"
+            ],
+            "SeanMorris\\Ids\\Collection\\Driver": [
+                "SeanMorris\\Ids\\Collection\\RankedDriver",
+                "SeanMorris\\Ids\\Collection\\ReadOnlyDriver"
+            ],
+            "SeanMorris\\Ids\\___\\BaseDriver": [
+                "SeanMorris\\Ids\\Collection\\RankedDriver",
+                "SeanMorris\\Ids\\Collection\\ReadOnlyDriver"
+            ],
+            "class@anonymous\u0000\/app\/vendor\/seanmorris\/ids\/source\/Collection\/Driver.php:13$13": [
+                "SeanMorris\\Ids\\Collection\\RankedDriver",
+                "SeanMorris\\Ids\\Collection\\ReadOnlyDriver"
+            ],
+            "CachingIterator": [
+                "SeanMorris\\Ids\\Collection\\CacheReIterator"
+            ],
+            "SeanMorris\\Ids\\Api\\OutputParser": [
+                "SeanMorris\\Ids\\Api\\Output\\Csv",
+                "SeanMorris\\Ids\\Api\\Output\\Json",
+                "SeanMorris\\Ids\\Api\\Output\\Plain",
+                "SeanMorris\\Ids\\Api\\Output\\Tsv",
+                "SeanMorris\\Ids\\Api\\Output\\Yaml"
+            ],
+            "SeanMorris\\Ids\\Api\\Output\\Csv": [
+                "SeanMorris\\Ids\\Api\\Output\\Tsv"
+            ],
+            "SeanMorris\\Ids\\Api\\InputParser": [
+                "SeanMorris\\Ids\\Api\\Input\\Csv",
+                "SeanMorris\\Ids\\Api\\Input\\Json",
+                "SeanMorris\\Ids\\Api\\Input\\Plain",
+                "SeanMorris\\Ids\\Api\\Input\\Tsv",
+                "SeanMorris\\Ids\\Api\\Input\\Yaml"
+            ],
+            "SeanMorris\\Ids\\Api\\Input\\Csv": [
+                "SeanMorris\\Ids\\Api\\Input\\Tsv"
+            ],
+            "SeanMorris\\Ids\\Inject\\FactoryMethod": [
+                "SeanMorris\\Ids\\Inject\\SingletonMethod"
+            ],
+            "SeanMorris\\Ids\\WrappedMethod": [
+                "SeanMorris\\Ids\\Inject\\FactoryMethod",
+                "SeanMorris\\Ids\\Inject\\SingletonMethod"
+            ],
+            "SeanMorris\\Ids\\Test\\Model\\Foozle": [
+                "SeanMorris\\Ids\\Test\\Model\\Foobar"
+            ],
+            "UnitTestCase": [
+                "SeanMorris\\Ids\\Test\\QueueTest",
+                "SeanMorris\\Ids\\Test\\FileTest",
+                "SeanMorris\\Ids\\Test\\ModelTest",
+                "SeanMorris\\Ids\\Test\\PathTest",
+                "SeanMorris\\Ids\\Test\\LoaderTest",
+                "SeanMorris\\Ids\\Test\\LinkerTest",
+                "SeanMorris\\Ids\\Test\\DirectoryTest",
+                "SeanMorris\\Ids\\Test\\RouterTest",
+                "SeanMorris\\Ids\\Test\\PackageTest",
+                "SeanMorris\\Ids\\Test\\CollectionTest"
+            ],
+            "SimpleTestCase": [
+                "SeanMorris\\Ids\\Test\\CollectionTest",
+                "SeanMorris\\Ids\\Test\\DirectoryTest",
+                "SeanMorris\\Ids\\Test\\FileTest",
+                "SeanMorris\\Ids\\Test\\LinkerTest",
+                "SeanMorris\\Ids\\Test\\LoaderTest",
+                "SeanMorris\\Ids\\Test\\ModelTest",
+                "SeanMorris\\Ids\\Test\\PackageTest",
+                "SeanMorris\\Ids\\Test\\PathTest",
+                "SeanMorris\\Ids\\Test\\QueueTest",
+                "SeanMorris\\Ids\\Test\\RouterTest"
+            ],
+            "Elliptic\\Curve\\BaseCurve": [
+                "Elliptic\\Curve\\EdwardsCurve",
+                "Elliptic\\Curve\\MontCurve",
+                "Elliptic\\Curve\\ShortCurve"
+            ],
+            "Elliptic\\Curve\\BaseCurve\\Point": [
+                "Elliptic\\Curve\\EdwardsCurve\\Point",
+                "Elliptic\\Curve\\MontCurve\\Point",
+                "Elliptic\\Curve\\ShortCurve\\JPoint",
+                "Elliptic\\Curve\\ShortCurve\\Point"
+            ],
+            "": [
+                "BI\\BigInteger",
+                "BN\\BN",
+                "BN\\Red",
+                "Composer\\Autoload\\ClassLoader",
+                "Composer\\Autoload\\ComposerStaticInit20cbed461236eada04735f2fbbf62965",
+                "Composer\\InstalledVersions",
+                "Elliptic\\Curve\\BaseCurve",
+                "Elliptic\\Curve\\BaseCurve\\Point",
+                "Elliptic\\Curve\\EdwardsCurve",
+                "Elliptic\\Curve\\EdwardsCurve\\Point",
+                "Elliptic\\Curve\\MontCurve",
+                "Elliptic\\Curve\\MontCurve\\Point",
+                "Elliptic\\Curve\\PresetCurve",
+                "Elliptic\\Curve\\ShortCurve",
+                "Elliptic\\Curve\\ShortCurve\\JPoint",
+                "Elliptic\\Curve\\ShortCurve\\Point",
+                "Elliptic\\Curves",
+                "Elliptic\\EC",
+                "Elliptic\\EC\\KeyPair",
+                "Elliptic\\EC\\Signature",
+                "Elliptic\\EdDSA",
+                "Elliptic\\EdDSA\\KeyPair",
+                "Elliptic\\EdDSA\\Signature",
+                "Elliptic\\HmacDRBG",
+                "Elliptic\\Utils",
+                "Ethereum\\EcRecover",
+                "SeanMorris\\Ids\\Api\\InputParser",
+                "SeanMorris\\Ids\\Api\\Input\\Csv",
+                "SeanMorris\\Ids\\Api\\Input\\Json",
+                "SeanMorris\\Ids\\Api\\Input\\Plain",
+                "SeanMorris\\Ids\\Api\\Input\\Tsv",
+                "SeanMorris\\Ids\\Api\\Input\\Yaml",
+                "SeanMorris\\Ids\\Api\\OutputParser",
+                "SeanMorris\\Ids\\Api\\Output\\Csv",
+                "SeanMorris\\Ids\\Api\\Output\\Json",
+                "SeanMorris\\Ids\\Api\\Output\\Plain",
+                "SeanMorris\\Ids\\Api\\Output\\Tsv",
+                "SeanMorris\\Ids\\Api\\Output\\Yaml",
+                "SeanMorris\\Ids\\Api\\Response",
+                "SeanMorris\\Ids\\AssetManager",
+                "SeanMorris\\Ids\\ChildProcess",
+                "SeanMorris\\Ids\\Collection\\AppendGeneratorIterator",
+                "SeanMorris\\Ids\\Collection\\CacheReIterator",
+                "SeanMorris\\Ids\\Collection\\RankIterator",
+                "SeanMorris\\Ids\\Collection\\RankedDriver",
+                "SeanMorris\\Ids\\Collection\\ReadOnlyDriver",
+                "SeanMorris\\Ids\\Database",
+                "SeanMorris\\Ids\\Disk\\Directory",
+                "SeanMorris\\Ids\\Disk\\File",
+                "SeanMorris\\Ids\\Documentor",
+                "SeanMorris\\Ids\\Fuse",
+                "SeanMorris\\Ids\\HashToken",
+                "SeanMorris\\Ids\\Http\\Event",
+                "SeanMorris\\Ids\\Http\\EventSource",
+                "SeanMorris\\Ids\\Http\\Http",
+                "SeanMorris\\Ids\\Http\\Http201",
+                "SeanMorris\\Ids\\Http\\Http202",
+                "SeanMorris\\Ids\\Http\\Http302",
+                "SeanMorris\\Ids\\Http\\Http303",
+                "SeanMorris\\Ids\\Http\\Http400",
+                "SeanMorris\\Ids\\Http\\Http401",
+                "SeanMorris\\Ids\\Http\\Http402",
+                "SeanMorris\\Ids\\Http\\Http403",
+                "SeanMorris\\Ids\\Http\\Http404",
+                "SeanMorris\\Ids\\Http\\Http405",
+                "SeanMorris\\Ids\\Http\\Http406",
+                "SeanMorris\\Ids\\Http\\HttpDocument",
+                "SeanMorris\\Ids\\Http\\HttpException",
+                "SeanMorris\\Ids\\Http\\HttpResponse",
+                "SeanMorris\\Ids\\Idilic\\Cli",
+                "SeanMorris\\Ids\\Idilic\\IdilicEntry",
+                "SeanMorris\\Ids\\Idilic\\Route\\RootRoute",
+                "SeanMorris\\Ids\\Inject\\FactoryMethod",
+                "SeanMorris\\Ids\\Inject\\SingletonMethod",
+                "SeanMorris\\Ids\\Injectable",
+                "SeanMorris\\Ids\\Linker",
+                "SeanMorris\\Ids\\Loader",
+                "SeanMorris\\Ids\\Log",
+                "SeanMorris\\Ids\\LogMeta",
+                "SeanMorris\\Ids\\Logger",
+                "SeanMorris\\Ids\\Logger\\Gelf",
+                "SeanMorris\\Ids\\Logger\\Plain",
+                "SeanMorris\\Ids\\Mail",
+                "SeanMorris\\Ids\\Meta",
+                "SeanMorris\\Ids\\Method",
+                "SeanMorris\\Ids\\Model",
+                "SeanMorris\\Ids\\Mysql\\CountStatement",
+                "SeanMorris\\Ids\\Mysql\\DeleteStatement",
+                "SeanMorris\\Ids\\Mysql\\InsertStatement",
+                "SeanMorris\\Ids\\Mysql\\SelectStatement",
+                "SeanMorris\\Ids\\Mysql\\Statement",
+                "SeanMorris\\Ids\\Mysql\\UpdateStatement",
+                "SeanMorris\\Ids\\Mysql\\WhereStatement",
+                "SeanMorris\\Ids\\Package",
+                "SeanMorris\\Ids\\Path",
+                "SeanMorris\\Ids\\Queue",
+                "SeanMorris\\Ids\\Relationship",
+                "SeanMorris\\Ids\\Repl",
+                "SeanMorris\\Ids\\Request",
+                "SeanMorris\\Ids\\Routable",
+                "SeanMorris\\Ids\\Router",
+                "SeanMorris\\Ids\\Session",
+                "SeanMorris\\Ids\\Session\\Handler",
+                "SeanMorris\\Ids\\Settings",
+                "SeanMorris\\Ids\\SettingsReader",
+                "SeanMorris\\Ids\\Test\\CollectionTest",
+                "SeanMorris\\Ids\\Test\\DirectoryTest",
+                "SeanMorris\\Ids\\Test\\FileTest",
+                "SeanMorris\\Ids\\Test\\LinkerTest",
+                "SeanMorris\\Ids\\Test\\LoaderTest",
+                "SeanMorris\\Ids\\Test\\ModelTest",
+                "SeanMorris\\Ids\\Test\\Model\\Common",
+                "SeanMorris\\Ids\\Test\\Model\\Foobar",
+                "SeanMorris\\Ids\\Test\\Model\\Foozle",
+                "SeanMorris\\Ids\\Test\\Model\\Grocery",
+                "SeanMorris\\Ids\\Test\\Model\\GroceryList",
+                "SeanMorris\\Ids\\Test\\Model\\Octopus",
+                "SeanMorris\\Ids\\Test\\Model\\Tentacle",
+                "SeanMorris\\Ids\\Test\\PackageTest",
+                "SeanMorris\\Ids\\Test\\PathTest",
+                "SeanMorris\\Ids\\Test\\QueueTest",
+                "SeanMorris\\Ids\\Test\\Route\\FooRoute",
+                "SeanMorris\\Ids\\Test\\Route\\HomeRoute",
+                "SeanMorris\\Ids\\Test\\Route\\RootRoute",
+                "SeanMorris\\Ids\\Test\\RouterTest",
+                "SeanMorris\\Ids\\WrappedMethod",
+                "SeanMorris\\MediaGate\\AccessToken",
+                "SeanMorris\\MediaGate\\Github",
+                "SeanMorris\\MediaGate\\MediaRoute",
+                "SeanMorris\\MediaGate\\VerifyRoute",
+                "Symfony\\Polyfill\\Mbstring\\Mbstring",
+                "kornrunner\\Keccak"
+            ]
+        }
+    }
+}
