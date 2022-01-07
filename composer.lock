@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3aaf4e937431554bad4190790956924d",
+    "content-hash": "c8bf01126548289f219981e69175f57f",
     "packages": [
         {
             "name": "digitaldonkey/ecverify",
@@ -147,12 +147,12 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/simplito/bigint-wrapper-php.git",
+                "url": "https://github.com/seanmorris/bigint-wrapper-php.git",
                 "reference": "cf21ec76d33f103add487b3eadbd9f5033a25930"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplito/bigint-wrapper-php/zipball/cf21ec76d33f103add487b3eadbd9f5033a25930",
+                "url": "https://api.github.com/repos/seanmorris/bigint-wrapper-php/zipball/cf21ec76d33f103add487b3eadbd9f5033a25930",
                 "reference": "cf21ec76d33f103add487b3eadbd9f5033a25930",
                 "shasum": ""
             },
@@ -162,7 +162,6 @@
                     "BI\\": "lib/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -175,8 +174,7 @@
             ],
             "description": "Common interface for php_gmp and php_bcmath modules",
             "support": {
-                "issues": "https://github.com/simplito/bigint-wrapper-php/issues",
-                "source": "https://github.com/simplito/bigint-wrapper-php/tree/1.0.0"
+                "source": "https://github.com/seanmorris/bigint-wrapper-php/tree/1.0.0"
             },
             "time": "2018-02-27T12:38:08+00:00"
         },
@@ -475,7 +473,11 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "^8.1.0",
+        "ext-bcmath": "*",
+        "ext-mbstring": "*"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"
 }

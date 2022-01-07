@@ -24,5 +24,11 @@
 		"psr-4": {
 		"SeanMorris\\MediaGate\\":"source/"
 		}
-	}
+	},
+	"repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/seanmorris/bigint-wrapper-php"
+        }
+    ]
 }
