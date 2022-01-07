@@ -17,5 +17,3 @@ if(!empty($_ENV['REDIS_URL']))
 }
 
 session_start();
-
-header('Set-Cookie: PHPSESSID='.$_COOKIE["PHPSESSID"].'; SameSite=None');
