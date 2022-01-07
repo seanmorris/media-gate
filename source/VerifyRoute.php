@@ -1,8 +1,6 @@
 <?php
 namespace SeanMorris\MediaGate;
 
-use Ethereum\EcRecover;
-
 class VerifyRoute implements \SeanMorris\Ids\Routable
 {
 	public $routes = [
@@ -13,12 +11,15 @@ class VerifyRoute implements \SeanMorris\Ids\Routable
 	{
 		return false;
 
+		$frontend  = \SeanMorris\Ids\Settings::read('frontend');
 		$signature = $router->request()->post('signature');
 		$address =   $router->request()->post('address');
 		$message =   $router->request()->post('message');
 
+
 		header('Content-type: text/json');
-		header('Access-Control-Allow-Origin: *');
+		header('Access-Control-Allow-Origin: ' . $frontend);
+		header('Access-Control-Allow-Credentials: true');
 
 		if(!$address || !$message || !$signature)
 		{
@@ -51,53 +52,28 @@ class VerifyRoute implements \SeanMorris\Ids\Routable
 
 	public function challenge($router)
 	{
-		header('Content-type: text/json');
-		header('Access-Control-Allow-Origin: *');
+		$frontend  = \SeanMorris\Ids\Settings::read('frontend');
 
-		$retort  = $router->request()->post('retort');
+		header('Content-type: text/json');
+		header('Access-Control-Allow-Origin: ' . $frontend);
+		header('Access-Control-Allow-Credentials: true');
+
+		$retort = $router->request()->post('retort');
 
 		if($retort)
 		{
 			$retort = json_decode($retort);
-
-			if(empty($retort->time)
-				|| empty($retort->address)
-				|| empty($retort->signature)
-				|| empty($retort->challenge)
-			){
-				return json_encode((object) ([
-					'error'       => ''
-					, 'requested' => ''
-					, 'response'  => (object) ['valid' => FALSE]
-				]));
-			}
-
-			$valid = EcRecover::personalVerifyEcRecover(
-				$retort->challenge,  $retort->signature, $retort->address
-			);
-
-			$recoveredAddress = EcRecover::personalEcRecover(
-				$retort->challenge,  $retort->signature,  $retort->address
-			);
+			$result = AccessToken::validate($retort);
 
 			return json_encode((object) ([
 				'requested' => $retort
 				, 'response' => (object) [
-					'recoveredAddress' => $recoveredAddress
-					, 'valid' => $valid
+					'recoveredAddress' => $result->recoveredAddress
+					, 'valid' => $result->valid
 				]
 			]));
 		}
 
-		$address = $router->request()->post('address');
-		$blob = bin2hex(openssl_random_pseudo_bytes(64));
-
-		return json_encode([
-			'type'        => 'challenge'
-			, 'issuedAt'  => time()
-			, 'issuedFor' => $address
-			, 'validThru' => time() + 150
-			, 'challenge' => implode(PHP_EOL, str_split($blob, 80))
-		]);
+		return json_encode( AccessToken::generate( $router->request()->post('address') ) );
 	}
 }

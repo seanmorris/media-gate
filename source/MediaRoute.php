@@ -7,8 +7,14 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 {
 	public function index()
 	{
+		$frontend  = \SeanMorris\Ids\Settings::read('frontend');
+
+		header('Access-Control-Allow-Headers:authorization, content-type, accept, origin');
+		header('Access-Control-Allow-Methods:GET, POST, OPTIONS');
+		header('Access-Control-Allow-Credentials: true');
+		header('Access-Control-Allow-Origin: ' . $frontend);
+
 		header('Content-type: text/json');
-		header('Access-Control-Allow-Origin: *');
 
 		$token  = \SeanMorris\Ids\Settings::read('github', 'token');
 		$github = new Github($token);
@@ -21,9 +27,12 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 
 	public function show($router)
 	{
+		$frontend  = \SeanMorris\Ids\Settings::read('frontend');
+
 		header('Access-Control-Allow-Headers:authorization, content-type, accept, origin');
 		header('Access-Control-Allow-Methods:GET, POST, OPTIONS');
-		header('Access-Control-Allow-Origin: *');
+		header('Access-Control-Allow-Credentials: true');
+		header('Access-Control-Allow-Origin: ' . $frontend);
 
 		$token = $router->request()->headers('Authorization');
 
@@ -53,31 +62,10 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 			return FALSE;
 		}
 
-		$challenge = json_decode($token->challenge);
+		$result = AccessToken::validate($token);
 
-		if(!$challenge)
-		{
-			\SeanMorris\Ids\Log::debug('Challenge not valid.');
-			return FALSE;
-		}
-
-		if(time() > $challenge->validThru)
-		{
-			\SeanMorris\Ids\Log::debug('Challenge expired.');
-			return FALSE;
-		}
-
-		$valid = EcRecover::personalVerifyEcRecover(
-			$token->challenge
-			, $token->signature
-			, $token->address
-		);
-
-		$recoveredAddress = EcRecover::personalEcRecover(
-			$token->challenge
-			,  $token->signature
-			,  $token->address
-		);
+		$recoveredAddress = $result->recoveredAddress;
+		$valid            = $result->valid;
 
 		if(!$valid || $token->address !== $recoveredAddress)
 		{
