@@ -1,9 +1,10 @@
 <?php
 
-if($_ENV['REDIS_URL'])
+if(!empty($_ENV['REDIS_URL']))
 {
 	$redisUrlParts = parse_url($_ENV['REDIS_URL']);
 	\SeanMorris\Ids\Log::error($redisUrlParts);
+	header('Set-Cookie: PHPSESSID='.$_COOKIE["PHPSESSID"].'; SameSite=None');
 	ini_set('session.save_handler', 'redis');
 	ini_set(
 		'session.save_path'
