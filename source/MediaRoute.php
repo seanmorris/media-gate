@@ -75,6 +75,7 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 
 		$headers = [
 			'json'  => 'Content-type: application/json'
+			, 'pdf'  => 'Content-type: application/pdf'
 			, 'html' => 'Content-type: text/html'
 			, 'jpg'  => 'Content-type: image/jpeg'
 			, 'png'  => 'Content-type: image/png'
