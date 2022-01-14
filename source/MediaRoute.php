@@ -159,18 +159,18 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 
 				if($method === 'GET')
 				{
-					while($blob)
-					{
-						// print substr($blob, 0, 1024*10);
-						// $blob = substr($blob, 1024*10);
-						// usleep(1);
+					// while($blob)
+					// {
+					// 	// print substr($blob, 0, 1024*10);
+					// 	// $blob = substr($blob, 1024*10);
+					// 	// usleep(1);
 
-						// print substr($blob, 0, 1024*10);
-						// $blob = substr($blob, 1024*10);
-						// usleep(1);
+					// 	// print substr($blob, 0, 1024*10);
+					// 	// $blob = substr($blob, 1024*10);
+					// 	// usleep(1);
 
-						print $blob;
-					}
+					// }
+					print $blob;
 					die;
 				}
 			}
