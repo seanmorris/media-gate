@@ -167,7 +167,7 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 
 						print substr($blob, 0, 1024*1024);
 						$blob = substr($blob, 1024*1024);
-						usleep(1);
+						usleep(100);
 					}
 					die;
 				}
