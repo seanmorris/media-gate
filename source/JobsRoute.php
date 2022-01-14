@@ -45,14 +45,13 @@ class JobsRoute implements \SeanMorris\Ids\Routable
 			if($success)
 			{
 				$results[$fromAddress]['imported']++;
-
-				Subscription::assignExpiry($fromAddress);
 			}
 			else
 			{
 				$results[$fromAddress]['exists']++;
 			}
 
+			Subscription::assignExpiry($fromAddress);
 		}
 
 		return json_encode($results, 0, 4);
