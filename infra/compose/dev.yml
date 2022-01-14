@@ -29,6 +29,22 @@ services:
       file: base.yml
       service: database
 
+  redis:
+    ports:
+      - "127.0.0.1:6379:6379"
+    extends:
+      file: base.yml
+      service: redis
+
+  webdis:
+    ports:
+      - "127.0.0.1:7379:7379"
+    extends:
+      file: base.yml
+      service: webdis
+
 volumes:
+  redis:
+    driver: local
   schema:
     driver: local

@@ -4,7 +4,9 @@ namespace SeanMorris\MediaGate;
 class VerifyRoute implements \SeanMorris\Ids\Routable
 {
 	public $routes = [
-		'media' => \SeanMorris\MediaGate\MediaRoute::CLASS
+		'purchase' => \SeanMorris\MediaGate\PurchaseRoute::CLASS
+		, 'media'  => \SeanMorris\MediaGate\MediaRoute::CLASS
+		, 'jobs'   => \SeanMorris\MediaGate\JobsRoute::CLASS
 	];
 
 	public function index($router)

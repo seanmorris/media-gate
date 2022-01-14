@@ -21,6 +21,32 @@ services:
       file: ../../vendor/seanmorris/ids/infra/compose/base.yml
       service: database
 
+  redis:
+    image: redis:5.0
+    volumes: ['redis:/data']
+    restart: always
+
+  webdis:
+    build:
+      context: ../../
+      dockerfile: infra/docker/webdis.Dockerfile
+      target: ${TARGET}
+      args:
+        TARGET: ${TARGET}
+        TAG:    ${TAG}
+    image: ${REPO}/${PROJECT}.webdis:${TAG}
+    restart: always
+    environment:
+      TAG: ${TAG}
+      TARGET: ${TARGET}
+    env_file:
+      - ${MAIN_DLT}
+      - ${MAIN_ENV}
+      - ${TRGT_DLT}
+      - ${TRGT_ENV}
+
 volumes:
+  redis:
+    driver: local
   schema:
     driver: local
