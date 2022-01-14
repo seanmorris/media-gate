@@ -161,10 +161,6 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 				{
 					while($blob)
 					{
-						// print substr($blob, 0, 1024*10);
-						// $blob = substr($blob, 1024*10);
-						// usleep(1);
-
 						print substr($blob, 0, 1024*1024);
 						$blob = substr($blob, 1024*1024);
 						usleep(100);

@@ -6,8 +6,11 @@ class PurchaseRoute implements \SeanMorris\Ids\Routable
 	public function price($router)
 	{
 		$rates = Exchanger::getLatestRates();
+
+		$price = \SeanMorris\Ids\Settings::read('sub', 'price');
+
 		$ethToUsd = new Currency($rates->ETH);
-		$usdPrice = new Currency('USD5');
+		$usdPrice = new Currency($price);
 		$ethPrice = $ethToUsd->amount * $usdPrice->amount;
 
 		$frontend  = \SeanMorris\Ids\Settings::read('frontend');

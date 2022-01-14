@@ -6,11 +6,11 @@ class Subscription
 	public static function assignExpiry($fromAddress)
 	{
 		$streamName = 'TX-'. $fromAddress;
-		$price = 'USD1'; //\SeanMorris\Ids\Settings::read('sub', 'price');
+		$price = \SeanMorris\Ids\Settings::read('sub', 'price');
 
 		$rates = Exchanger::getLatestRates();
 		$ethToUsd = new Currency($rates->ETH);
-		$usdPrice = new Currency('USD5');
+		$usdPrice = new Currency($price);
 
 		$ethPrice = $ethToUsd->amount * ($usdPrice->amount + -1);
 
