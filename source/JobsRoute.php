@@ -83,7 +83,7 @@ class JobsRoute implements \SeanMorris\Ids\Routable
 		$ethToUsd = new Currency($rates->ETH);
 		$usdPrice = new Currency('USD5');
 
-		$ethPrice = $ethToUsd->amount * $usdPrice->amount;
+		$ethPrice = $ethToUsd->amount * ($usdPrice->amount + -1);
 
 		$redis = \SeanMorris\Ids\Settings::get('redis');
 

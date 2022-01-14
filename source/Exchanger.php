@@ -36,6 +36,24 @@ class Exchanger
 		return $success;
 	}
 
+	public static function getRatesAt($time)
+	{
+		$redis = \SeanMorris\Ids\Settings::get('redis');
+
+		$latestRates = $redis->xRange('EXG-USD', $time, '+', '1');
+
+		if(!$latestRates)
+		{
+			return FALSE;
+		}
+
+		$sequenceCode = array_keys($latestRates)[0];
+
+		[$time, $seq] = explode('-', $sequenceCode);
+
+		return (object) $latestRates[$sequenceCode];
+	}
+
 	public static function getLatestRates()
 	{
 		$redis = \SeanMorris\Ids\Settings::get('redis');

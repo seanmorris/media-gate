@@ -26,7 +26,10 @@ if(!empty($_ENV['REDIS_URL']))
 	\SeanMorris\Ids\Settings::register('redis', function() use($redisUrlParts){
 		$redis = new Redis();
 		$redis->connect($redisUrlParts['host'], $redisUrlParts['port']);
-		$redis->auth($redisUrlParts['pass']);
+		if(!empty($redisUrlParts['pass']))
+		{
+			$redis->auth($redisUrlParts['pass']);
+		}
 		return $redis;
 	});
 }
