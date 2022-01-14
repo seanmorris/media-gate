@@ -29,12 +29,16 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 	{
 		$frontend  = \SeanMorris\Ids\Settings::read('frontend');
 
-		header('Access-Control-Allow-Headers:authorization, content-type, accept, origin');
+		header('Access-Control-Allow-Headers:authorization, content-type, accept, origin, range');
 		header('Access-Control-Allow-Methods:GET, POST, OPTIONS');
 		header('Access-Control-Allow-Credentials: true');
 		header('Access-Control-Allow-Origin: ' . $frontend);
 
+		$method = $router->request()->method();
 		$token = $router->request()->headers('Authorization');
+		$range = $router->request()->headers('Range') || '';
+
+		[$rangeStart, $rangeEnd] = [0, INF] + explode('-', $range);
 
 		if(!$token)
 		{
@@ -125,18 +129,48 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 				$hash = substr($file->_links->git, -40);
 				$blob = $github->getBlob($repo, $hash);
 
-				header('Content-Length: ' . strlen($blob));
-
 				ob_flush();
 				ob_end_flush();
 
-				while($blob)
+				if($rangeEnd < INF)
 				{
-					print substr($blob, 0, 1024 * 1024);
-					$blob = substr($blob, 1024 * 1024);
-					usleep(1);
+					$blob = substr($blob, $rangeStart, $rangeEnd);
 				}
-				die;
+				else if($rangeStart)
+				{
+					$blob = substr($blob, $rangeStart);
+				}
+
+				if($rangeStart || $rangeEnd < INF)
+				{
+					header('HTTP/1.1 206 Partial Content');
+					header(sprintf(
+						'Content-Range: %d-%d/%d'
+						, $rangeStart
+						, $rangeEnd
+						, strlen($blob)
+					));
+				}
+				else
+				{
+					header('HTTP/1.1 200 Aight');
+					header('Content-Length: ' . strlen($blob));
+				}
+
+				if($method === 'GET')
+				{
+					while($blob)
+					{
+						// print substr($blob, 0, 1024*10);
+						// $blob = substr($blob, 1024*10);
+						// usleep(1);
+
+						print substr($blob, 0, 1024*10);
+						$blob = substr($blob, 1024*10);
+						usleep(1);
+					}
+					die;
+				}
 			}
 		}
 	}
