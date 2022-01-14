@@ -16,7 +16,7 @@ class AccessToken
 			'type'        => 'challenge'
 			, 'issuedAt'  => time()
 			, 'issuedFor' => $address
-			, 'validThru' => time() + 10
+			, 'validThru' => time() + 1000
 			, 'challenge' => $challenge
 		];
 	}

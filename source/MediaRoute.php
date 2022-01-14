@@ -125,7 +125,18 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 				$hash = substr($file->_links->git, -40);
 				$blob = $github->getBlob($repo, $hash);
 
-				return $blob;
+				header('Content-Length: ' . strlen($blob));
+
+				ob_flush();
+				ob_end_flush();
+
+				while($blob)
+				{
+					print substr($blob, 0, 1024 * 30);
+					$blob = substr($blob, 1024 * 30);
+					usleep(10);
+				}
+				die;
 			}
 		}
 	}
