@@ -73,6 +73,15 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 			return FALSE;
 		}
 
+		$subKey = 'SUBS-' . $recoveredAddress;
+
+		$redis = \SeanMorris\Ids\Settings::get('redis');
+
+		if(!$existingSubscription = json_decode($redis->get($subKey)))
+		{
+			return FALSE;
+		}
+
 		$headers = [
 			'json'  => 'Content-type: application/json'
 			, 'pdf'  => 'Content-type: application/pdf'
