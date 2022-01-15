@@ -8,7 +8,6 @@ if($redisUrl = \SeanMorris\Ids\Settings::read('REDIS', 'URL'))
 if(!empty($_ENV['REDIS_URL']))
 {
 	$redisUrlParts = parse_url($_ENV['REDIS_URL']);
-	\SeanMorris\Ids\Log::error($redisUrlParts);
 
 	ini_set('session.save_handler', 'redis');
 	ini_set(

@@ -30,7 +30,7 @@ $router->contextSet('composer', $composer);
 ob_start();
 $response = $router->route();
 $debug = ob_get_contents();
-ob_end_clean();
+ob_get_level() && ob_end_clean();
 
 print $response;
 

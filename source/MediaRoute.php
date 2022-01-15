@@ -5,42 +5,45 @@ use Ethereum\EcRecover;
 
 class MediaRoute implements \SeanMorris\Ids\Routable
 {
-	public function index()
+	public function _init()
 	{
-		$frontend  = \SeanMorris\Ids\Settings::read('frontend');
+		$frontend = \SeanMorris\Ids\Settings::read('frontend');
 
 		header('Access-Control-Allow-Headers:authorization, content-type, accept, origin');
 		header('Access-Control-Allow-Methods:GET, POST, OPTIONS');
 		header('Access-Control-Allow-Credentials: true');
 		header('Access-Control-Allow-Origin: ' . $frontend);
+	}
+
+	public function index()
+	{
+		$github = new Github(\SeanMorris\Ids\Settings::read('github', 'token'));
+		$repo   = 'seanmorris/ephsys-media-processor';
+		$list   = $github->getFile($repo, 'index/content.json');
 
 		header('Content-type: text/json');
-
-		$token  = \SeanMorris\Ids\Settings::read('github', 'token');
-		$github = new Github($token);
-
-		$repo = 'seanmorris/ephsys-media-processor';
-		$file = 'index/content.json';
-
-		return $github->getFile($repo, $file);
+		return $list;
 	}
 
 	public function show($router)
 	{
-		$frontend  = \SeanMorris\Ids\Settings::read('frontend');
+		$assetPath = $router->request()->get('assetPath') ?? '';
+		$method    = $router->request()->method();
+		$redis     = \SeanMorris\Ids\Settings::get('redis');
 
-		header('Access-Control-Allow-Headers:authorization, content-type, accept, origin, range');
-		header('Access-Control-Allow-Methods:GET, POST, OPTIONS');
-		header('Access-Control-Allow-Credentials: true');
-		header('Access-Control-Allow-Origin: ' . $frontend);
+		if(!$mimeHeader = Mime::getType($assetPath))
+		{
+			\SeanMorris\Ids\Log::error('Type not specified.');
+			return FALSE;
+		}
 
-		$method = $router->request()->method();
-		$token = $router->request()->headers('Authorization');
-		$range = $router->request()->headers('Range') || '';
+		if($method === 'OPTIONS')
+		{
+			header('Content-Type: ' . $mimeHeader);
+			return;
+		}
 
-		[$rangeStart, $rangeEnd] = [0, INF] + explode('-', $range);
-
-		if(!$token)
+		if(!$token = $router->request()->headers('Authorization'))
 		{
 			\SeanMorris\Ids\Log::debug('Access token not provided.');
 
@@ -54,120 +57,60 @@ class MediaRoute implements \SeanMorris\Ids\Routable
 			return FALSE;
 		}
 
-		$token = json_decode(substr($token, 7));
-
-		if(empty($token->time)
-			|| empty($token->address)
-			|| empty($token->signature)
-			|| empty($token->challenge)
-		){
-			\SeanMorris\Ids\Log::debug('Access token not valid.');
-
-			return FALSE;
-		}
-
+		$token  = json_decode(substr($token, 7));
 		$result = AccessToken::validate($token);
 
-		$recoveredAddress = $result->recoveredAddress;
-		$valid            = $result->valid;
+		$recoveredAddress = $result->recoveredAddress ?? NULL;
 
-		if(!$valid || $token->address !== $recoveredAddress)
+		if(!$result->valid || $token->address !== $recoveredAddress)
 		{
 			\SeanMorris\Ids\Log::debug('Challenge address does not match.');
 			return FALSE;
 		}
 
-		$subKey = 'SUBS-' . $recoveredAddress;
-
-		$redis = \SeanMorris\Ids\Settings::get('redis');
-
-		if(!$existingSubscription = json_decode($redis->get($subKey)))
+		if(!$existingSubscription = json_decode($redis->get('SUBS-' . $recoveredAddress)))
 		{
 			return FALSE;
 		}
 
-		$headers = [
-			'json'  => 'Content-type: application/json'
-			, 'pdf'  => 'Content-type: application/pdf'
-			, 'html' => 'Content-type: text/html'
-			, 'jpg'  => 'Content-type: image/jpeg'
-			, 'png'  => 'Content-type: image/png'
-			, 'mp3'  => 'Content-type: audio/mpeg'
-			, 'mp4'  => 'Content-type: video/mpeg'
-		];
-
-		$assetPath = $router->request()->get('assetPath') ?? '';
-
-		$header = $headers[substr($assetPath, -3)]
-			?? $headers[substr($assetPath, -4)];
-
-		if(!$header)
+		if($existingSubscription->expiry < time())
 		{
-			\SeanMorris\Ids\Log::debug('Type not specified.');
 			return FALSE;
 		}
 
-		header($header);
-
-		$token  = \SeanMorris\Ids\Settings::read('github', 'token');
-		$github = new Github($token);
+		$github = new Github(\SeanMorris\Ids\Settings::read('github', 'token'));
 
 		$assetPathParts = explode('/', $assetPath);
+		$directoryPath  = implode('/', array_slice($assetPathParts, 0, -1));
 
-		array_pop($assetPathParts);
-
-		$directoryPath = implode($assetPathParts);
-
-		$repo = 'seanmorris/ephsys-media-processor';
-
+		$repo  = 'seanmorris/ephsys-media-processor';
 		$files = $github->getDir($repo, $directoryPath);
 
 		foreach($files as $file)
 		{
-			if($file->path === $assetPath)
+			if($file->path !== $assetPath)
 			{
-				$hash = substr($file->_links->git, -40);
-				$blob = $github->getBlob($repo, $hash);
-
-				ob_flush();
-				ob_end_flush();
-
-				if($rangeEnd < INF)
-				{
-					$blob = substr($blob, $rangeStart, $rangeEnd);
-				}
-				else if($rangeStart)
-				{
-					$blob = substr($blob, $rangeStart);
-				}
-
-				if($rangeStart || $rangeEnd < INF)
-				{
-					header('HTTP/1.1 206 Partial Content');
-					header(sprintf(
-						'Content-Range: %d-%d/%d'
-						, $rangeStart
-						, $rangeEnd
-						, strlen($blob)
-					));
-				}
-				else
-				{
-					header('HTTP/1.1 200 Aight');
-					header('Content-Length: ' . strlen($blob));
-				}
-
-				if($method === 'GET')
-				{
-					while($blob)
-					{
-						print substr($blob, 0, 1024*1024);
-						$blob = substr($blob, 1024*1024);
-						usleep(100);
-					}
-					die;
-				}
+				continue;
 			}
+
+			$hash = substr($file->_links->git, -40);
+			$blob = $github->getBlob($repo, $hash);
+			$full = strlen($blob);
+
+			ob_flush();
+			ob_end_flush();
+
+			header('HTTP/1.1 200 OK');
+			header('Content-Length: ' . $full);
+			header('Content-Type: ' . $mimeHeader);
+
+			while($blob)
+			{
+				print substr($blob, 0, 1024*128);
+				$blob = substr($blob, 1024*128);
+			}
+
+			die;
 		}
 	}
 }
