@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "215c88ae54484f68d57fbfa3f49670e5",
+    "content-hash": "b2a61fd96f1874dc699db748c1e4f837",
     "packages": [
+        {
+            "name": "braintree/braintree_php",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/braintree/braintree_php.git",
+                "reference": "f32fece534cce96cdbe9c0c6bd5af12469333900"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/braintree/braintree_php/zipball/f32fece534cce96cdbe9c0c6bd5af12469333900",
+                "reference": "f32fece534cce96cdbe9c0c6bd5af12469333900",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-dom": "*",
+                "ext-hash": "*",
+                "ext-openssl": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Braintree\\": "lib/Braintree"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Braintree",
+                    "homepage": "https://www.braintreepayments.com"
+                }
+            ],
+            "description": "Braintree PHP Client Library",
+            "support": {
+                "issues": "https://github.com/braintree/braintree_php/issues",
+                "source": "https://github.com/braintree/braintree_php/tree/5.0.0"
+            },
+            "time": "2020-03-25T16:55:18+00:00"
+        },
         {
             "name": "digitaldonkey/ecverify",
             "version": "1.0",
@@ -106,17 +154,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/seanmorris/ids.git",
-                "reference": "0a46786ade30cd9611840adc2efc7122b842e67f"
+                "reference": "6224a3512432384f8f778ed3bb25e888b9b2fbbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seanmorris/ids/zipball/0a46786ade30cd9611840adc2efc7122b842e67f",
-                "reference": "0a46786ade30cd9611840adc2efc7122b842e67f",
+                "url": "https://api.github.com/repos/seanmorris/ids/zipball/6224a3512432384f8f778ed3bb25e888b9b2fbbe",
+                "reference": "6224a3512432384f8f778ed3bb25e888b9b2fbbe",
                 "shasum": ""
             },
             "require-dev": {
                 "phpunit/phpunit": "^9",
-                "seanmorris/ksqlc": "dev-master",
                 "simpletest/simpletest": "dev-master"
             },
             "bin": [
@@ -140,7 +187,7 @@
                 "issues": "https://github.com/seanmorris/ids/issues",
                 "source": "https://github.com/seanmorris/ids/tree/sm-api-tooling"
             },
-            "time": "2022-01-05T18:41:37+00:00"
+            "time": "2022-01-24T09:08:16+00:00"
         },
         {
             "name": "simplito/bigint-wrapper-php",
@@ -480,5 +527,5 @@
         "ext-redis": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }
